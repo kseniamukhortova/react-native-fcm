@@ -45,9 +45,11 @@ RCT_ENUM_CONVERTER(NSCalendarUnit,
     content.body =[RCTConvert NSString:details[@"body"]];
     NSString* sound = [RCTConvert NSString:details[@"sound"]];
     if(sound != nil){
-        content.sound = [UNNotificationSound soundNamed:sound];
-    }else{
-        content.sound = [UNNotificationSound defaultSound];
+        if ([sound isEqual:@"default"]) {
+            content.sound = [UNNotificationSound defaultSound];
+        } else {
+            content.sound = [UNNotificationSound soundNamed:sound];
+        }
     }
     content.categoryIdentifier = [RCTConvert NSString:details[@"click_action"]];
     content.userInfo = details;
@@ -139,6 +141,10 @@ RCT_EXPORT_MODULE();
     return @[FCMNotificationReceived, FCMTokenRefreshed, FCMDirectChannelConnectionChanged];
 }
 
++ (BOOL)requiresMainQueueSetup {
+  return YES;
+}
+
 + (void)didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull RCTRemoteNotificationCallback)completionHandler {
     NSMutableDictionary* data = [[NSMutableDictionary alloc] initWithDictionary: userInfo];
     [data setValue:@"remote_notification" forKey:@"_notificationType"];
@@ -149,6 +155,7 @@ RCT_EXPORT_MODULE();
 + (void)didReceiveLocalNotification:(UILocalNotification *)notification {
     NSMutableDictionary* data = [[NSMutableDictionary alloc] initWithDictionary: notification.userInfo];
     [data setValue:@"local_notification" forKey:@"_notificationType"];
+    [data setValue:@(RCTSharedApplication().applicationState == UIApplicationStateInactive) forKey:@"opened_from_tray"];
     [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:@{@"data": data}];
 }
 
@@ -223,12 +230,30 @@ RCT_EXPORT_METHOD(getInitialNotification:(RCTPromiseResolveBlock)resolve rejecte
 
 RCT_EXPORT_METHOD(getAPNSToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    resolve([FIRMessaging messaging].APNSToken);
+    NSData * deviceToken = [FIRMessaging messaging].APNSToken;
+    const char *data = [deviceToken bytes];
+    NSMutableString *token = [NSMutableString string];
+    for (NSUInteger i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+    }
+    resolve([token copy]);
 }
 
 RCT_EXPORT_METHOD(getFCMToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     resolve([FIRMessaging messaging].FCMToken);
+}
+
+RCT_EXPORT_METHOD(deleteInstanceId:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[FIRInstanceID instanceID]deleteIDWithHandler:^(NSError * _Nullable error) {
+    
+    if (error != nil) {
+      reject([NSString stringWithFormat:@"%ld",error.code],error.localizedDescription,nil);
+    } else {
+      resolve(nil);
+    }
+  }];
 }
 
 - (void)messaging:(nonnull FIRMessaging *)messaging didRefreshRegistrationToken:(nonnull NSString *)fcmToken {
@@ -238,6 +263,7 @@ RCT_EXPORT_METHOD(getFCMToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromi
 RCT_EXPORT_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     if (RCTRunningInAppExtension()) {
+        resolve(nil);
         return;
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
@@ -250,6 +276,7 @@ RCT_EXPORT_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve rejecter:(R
             [UIUserNotificationSettings settingsForTypes:(NSUInteger)allNotificationTypes categories:nil];
             [app registerUserNotificationSettings:notificationSettings];
         }
+        resolve(nil);
     } else {
         // iOS 10 or later
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
@@ -263,14 +290,16 @@ RCT_EXPORT_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve rejecter:(R
              if(granted){
                  resolve(nil);
              } else{
-                 reject(@"notification_error", @"Failed to grand permission", error);
+                 reject(@"notification_error", @"Failed to grant permission", error);
              }
          }
          ];
 #endif
     }
 
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    });
 }
 
 RCT_EXPORT_METHOD(subscribeToTopic: (NSString*) topic)

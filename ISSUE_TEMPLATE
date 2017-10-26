@@ -1,11 +1,12 @@
-I'm not checking this repo every day since it is fairly stable now. If you have found a bug or need immediate attention please [AT]me
+there is a known issue with Firebase SDK with iOS 11 (search https://github.com/firebase/quickstart-ios issue number 327)
+fix is `pod 'FirebaseInstanceID', "2.0.0"`
 
-Please include following information for better support
+Before openning an issue
+1. Reproduce it with the example project in this repo.
+2. If you can't receive iOS notification, make sure you can receive notification using quickstart-ios project provided by Firebase team
 
-What version of RN and react-native-fcm are you running?
-What device are you using? (e.g iOS9 emulator, Android 6 device)?
-Is your app running in foreground, background or not running?
+When openning an issue, please include following information for better support
 
-Advanced:
-Have you tried adding break point in native handlers to see if message gets delivered?
-can share a project with issue?
+1. What version of RN and react-native-fcm are you running?
+2. What device are you using? (e.g iOS9 emulator, Android 6 device)?
+3. Is your app running in foreground, background or not running?

@@ -1,6 +1,6 @@
 import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
-const EventEmitter = new NativeEventEmitter(NativeModules.RNFIRMessaging);
+const EventEmitter = new NativeEventEmitter(NativeModules.RNFIRMessaging || {});
 
 export const FCMEvent = {
   RefreshToken: 'FCMTokenRefreshed',
@@ -46,6 +46,10 @@ FCM.isDirectChannelEstablished = () => {
 
 FCM.getFCMToken = () => {
   return RNFIRMessaging.getFCMToken();
+};
+
+FCM.deleteInstanceId = () =>{
+  return RNFIRMessaging.deleteInstanceId();
 };
 
 FCM.getAPNSToken = () => {

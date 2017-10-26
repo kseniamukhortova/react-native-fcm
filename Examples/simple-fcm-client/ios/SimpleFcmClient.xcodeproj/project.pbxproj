@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		3A6D62911E2044AB00D0D2C7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D62901E2044AB00D0D2C7 /* libz.tbd */; };
+		3AC87E631F6C190900194883 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3AC87E621F6C190900194883 /* bell.mp3 */; };
 		4339BFE81DAEE9D100F53B62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4339BFE71DAEE9D100F53B62 /* GoogleService-Info.plist */; };
 		5FE70723D2AE04BF2D98342D /* libPods-SimpleFcmClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8C044191FA88F1BCCF08BD /* libPods-SimpleFcmClientTests.a */; };
 		6976C617E52062E3EE272128 /* libPods-SimpleFcmClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A959965489E40CE19F2B06B4 /* libPods-SimpleFcmClient.a */; };
@@ -185,6 +186,34 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		3AAE7F501F55B50200E914A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7ECE1E25DB7D00323FB7;
+			remoteInfo = "third-party";
+		};
+		3AAE7F521F55B50200E914A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D3C1EBD27B6005632C8;
+			remoteInfo = "third-party-tvOS";
+		};
+		3AAE7F541F55B50200E914A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
+			remoteInfo = "double-conversion";
+		};
+		3AAE7F561F55B50200E914A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
+			remoteInfo = "double-conversion-tvOS";
+		};
 		4339BFCF1DAEBA3900F53B62 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C7DEB70C413E484CBFA6AC45 /* RNFIRMessaging.xcodeproj */;
@@ -231,6 +260,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		3A6D628E1E20449400D0D2C7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		3A6D62901E2044AB00D0D2C7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3AC87E621F6C190900194883 /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		4339BFE31DAEBB4800F53B62 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4339BFE61DAED4D900F53B62 /* SimpleFcmClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SimpleFcmClient.entitlements; path = SimpleFcmClient/SimpleFcmClient.entitlements; sourceTree = "<group>"; };
 		4339BFE71DAEE9D100F53B62 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -368,6 +398,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				3AC87E621F6C190900194883 /* bell.mp3 */,
 			);
 			name = SimpleFcmClient;
 			sourceTree = "<group>";
@@ -383,8 +414,20 @@
 				3A6D627A1E20428000D0D2C7 /* libcxxreact.a */,
 				3A6D627C1E20428000D0D2C7 /* libjschelpers.a */,
 				3A6D627E1E20428000D0D2C7 /* libjschelpers.a */,
+				3AAE7F511F55B50200E914A8 /* libthird-party.a */,
+				3AAE7F531F55B50200E914A8 /* libthird-party.a */,
+				3AAE7F551F55B50200E914A8 /* libdouble-conversion.a */,
+				3AAE7F571F55B50200E914A8 /* libdouble-conversion.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3AF0A6071F7BE4DC004B899F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				692E216422234A4CB6A7A838 /* libRNFIRMessaging.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		4339BFC21DAEBA3900F53B62 /* Products */ = {
@@ -462,6 +505,7 @@
 				00E356EF1AD99517003FC87E /* SimpleFcmClientTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				7E63D0154B6803F90ADF7C78 /* Pods */,
+				3AF0A6071F7BE4DC004B899F /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -532,11 +576,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 7GX5PDNNM3;
+						DevelopmentTeam = V3RSH3E49B;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 7GX5PDNNM3;
+						DevelopmentTeam = V3RSH3E49B;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -762,6 +806,34 @@
 			remoteRef = 3A6D627D1E20428000D0D2C7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		3AAE7F511F55B50200E914A8 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 3AAE7F501F55B50200E914A8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AAE7F531F55B50200E914A8 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 3AAE7F521F55B50200E914A8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AAE7F551F55B50200E914A8 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 3AAE7F541F55B50200E914A8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AAE7F571F55B50200E914A8 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 3AAE7F561F55B50200E914A8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4339BFD01DAEBA3900F53B62 /* libRNFIRMessaging.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -798,6 +870,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3AC87E631F6C190900194883 /* bell.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				4339BFE81DAEE9D100F53B62 /* GoogleService-Info.plist in Resources */,
 			);
@@ -818,7 +891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
 		53F91F9909896C758F1B39D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -958,7 +1031,7 @@
 			baseConfigurationReference = 55A6E80F734FA3F596B96C04 /* Pods-SimpleFcmClientTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7GX5PDNNM3;
+				DEVELOPMENT_TEAM = V3RSH3E49B;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -982,7 +1055,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 7GX5PDNNM3;
+				DEVELOPMENT_TEAM = V3RSH3E49B;
 				INFOPLIST_FILE = SimpleFcmClientTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1005,7 +1078,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 7GX5PDNNM3;
+				DEVELOPMENT_TEAM = V3RSH3E49B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1024,7 +1097,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fcm.simplefcmclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myidentifi.engage.qa;
 				PRODUCT_NAME = SimpleFcmClient;
 				USER_HEADER_SEARCH_PATHS = ./SimpleFcmClient/;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1039,7 +1112,7 @@
 				CODE_SIGN_ENTITLEMENTS = SimpleFcmClient/SimpleFcmClient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7GX5PDNNM3;
+				DEVELOPMENT_TEAM = V3RSH3E49B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1058,7 +1131,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fcm.simplefcmclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myidentifi.engage.qa;
 				PRODUCT_NAME = SimpleFcmClient;
 				USER_HEADER_SEARCH_PATHS = ./SimpleFcmClient/;
 				VERSIONING_SYSTEM = "apple-generic";

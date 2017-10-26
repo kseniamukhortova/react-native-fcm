@@ -1,4 +1,5 @@
 import FirebaseConstants from "./FirebaseConstants";
+import { Platform, Alert } from "react-native";
 
 const API_URL = "https://fcm.googleapis.com/fcm/send";
 
@@ -11,16 +12,33 @@ class FirebaseClient {
   }
 
   sendNotification(token) {
-    let body = {
-    	"to": token,
-      "notification":{
-    		"title": "Simple FCM Client",
-    		"body": "This is a notification with only NOTIFICATION.",
-    		"sound": "default",
-    		"click_action": "fcm.ACTION.HELLO"
-    	},
-    	"priority": 10
-    }
+    let body;
+
+    if(Platform.OS === 'android'){
+      body = {
+        "to": token,
+      	"data":{
+					"custom_notification": {
+						"title": "Simple FCM Client",
+						"body": "This is a notification with only NOTIFICATION.",
+						"sound": "default",
+						"priority": "high",
+						"show_in_foreground": true
+        	}
+    		},
+    		"priority": 10
+      }
+    } else {
+			body = {
+				"to": token,
+				"notification":{
+					"title": "Simple FCM Client",
+					"body": "This is a notification with only NOTIFICATION.",
+					"sound": "default"
+				},
+				"priority": 10
+			}
+		}
 
     this._send(JSON.stringify(body), "notification");
   }
@@ -31,9 +49,7 @@ class FirebaseClient {
       "data":{
     		"title": "Simple FCM Client",
     		"body": "This is a notification with only DATA.",
-    		"sound": "default",
-    		"click_action": "fcm.ACTION.HELLO",
-    		"remote": true
+    		"sound": "default"
     	},
     	"priority": "normal"
     }
@@ -47,14 +63,10 @@ class FirebaseClient {
       "notification":{
     		"title": "Simple FCM Client",
     		"body": "This is a notification with NOTIFICATION and DATA (NOTIF).",
-    		"sound": "default",
-    		"click_action": "fcm.ACTION.HELLO"
+				"sound": "default"
     	},
     	"data":{
-    		"title": "Simple FCM Client",
-    		"body": "This is a notification with NOTIFICATION and DATA (DATA)",
-    		"click_action": "fcm.ACTION.HELLO",
-    		"remote": true
+    		"hello": "there"
     	},
     	"priority": "high"
     }
@@ -62,16 +74,30 @@ class FirebaseClient {
     this._send(JSON.stringify(body), "notification-data");
   }
 
-  _send(body, type) {
+  async _send(body, type) {
+		if(FirebaseClient.KEY === 'YOUR_API_KEY'){
+			Alert.alert('Set your API_KEY in app/FirebaseConstants.js')
+			return;
+		}
   	let headers = new Headers({
   		"Content-Type": "application/json",
-  		"Content-Length": parseInt(body.length),
       "Authorization": "key=" + FirebaseConstants.KEY
   	});
 
-  	fetch(API_URL, { method: "POST", headers, body })
-  		.then(response => console.log("Send " + type + " response", response))
-  		.catch(error => console.log("Error sending " + type, error));
+		try {
+			let response = await fetch(API_URL, { method: "POST", headers, body });
+			console.log(response);
+			try{
+				response = await response.json();
+				if(!response.success){
+					Alert.alert('Failed to send notification, check error log')
+				}
+			} catch (err){
+				Alert.alert('Failed to send notification, check error log')
+			}
+		} catch (err) {
+			Alert.alert(err && err.message)
+		}
   }
 
 }
